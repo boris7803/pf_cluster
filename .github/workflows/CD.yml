@@ -1,9 +1,7 @@
 name: K8s CD
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+  workflow_call:
 
 jobs:
   deploy:
