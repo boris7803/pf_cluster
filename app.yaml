@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: demo-app
-  namespace: demo
+  name: pf-app
+  namespace: pf
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo-app
+      app: pf-app
   template:
     metadata:
       labels:
-        app: demo-app
+        app: pf-app
     spec:
       containers:
-        - name: app
-          image: ${APP_IMAGE}
+        - name: pf-app
+          image: 324037311587.dkr.ecr.ap-south-1.amazonaws.com/develeap/pf_project:4f997411e0e52a7be789f2143552765fd79c6967:latest
           ports:
             - containerPort: 3000
           env:
             - name: MONGODB_URI
-              value: "mongodb://admin:${MONGO_PASSWORD}@mongodb.demo.svc.cluster.local:27017"
+              value: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongodb.demo.svc.cluster.local:27017"
 
