@@ -9,9 +9,6 @@ on:
         required: true
       AWS_REGION:
         required: true
-      EKS_CLUSTER_NAME:
-        required: true
-
 jobs:
   deploy:
     runs-on: ubuntu-latest
