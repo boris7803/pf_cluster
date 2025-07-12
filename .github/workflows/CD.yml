@@ -9,6 +9,8 @@ on:
         required: true
       AWS_REGION:
         required: true
+      EKS_CLUSTER_NAME:
+        required: true
 
 jobs:
   deploy:
@@ -24,9 +26,9 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
+
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --region your-region --name your-cluster-name
+        run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
 
       - name: Deploy to cluster
-        run: |
-          kubectl apply -f .
+        run: kubectl apply -f .
