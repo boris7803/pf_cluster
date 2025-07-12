@@ -31,4 +31,4 @@ jobs:
       - name: Update kubeconfig
         run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{inputs.CLUSTER_NAME}}
       - name: Deploy to cluster
-        run: kubectl apply -f .
+        run: kubectl apply -f . --recursive=false --validate=true --include '*.yaml,*.yml'
