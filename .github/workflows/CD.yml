@@ -9,17 +9,24 @@ on:
         required: true
       AWS_REGION:
         required: true
+      PF_TOKEN:
+        required: true
     inputs:
       CLUSTER_NAME:
         required: true
         type: string 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout pf_cluster repo (k8s manifests)
         uses: actions/checkout@v3
+        with:
+          repository: boris7803/pf_cluster
+          token: ${{ secrets.PF_TOKEN }}
+          path: .
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v3
@@ -29,6 +36,8 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{inputs.CLUSTER_NAME}}
+        run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ inputs.CLUSTER_NAME }}
+
       - name: Deploy to cluster
-        run: kubectl apply -f . --recursive=false --validate=false --include '*.yaml,*.yml'
+        run: |
+          kubectl apply -f .
