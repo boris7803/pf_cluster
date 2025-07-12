@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: pf-app
-          image: 324037311587.dkr.ecr.ap-south-1.amazonaws.com/develeap/pf_project:4f997411e0e52a7be789f2143552765fd79c6967:latest
+          image: 228749873271.dkr.ecr.ap-south-1.amazonaws.com/develeap/pf-project:d1d68b093192bd89f0fbff1eb4effb23a5b6a947:latest
           ports:
             - containerPort: 3000
           env:
