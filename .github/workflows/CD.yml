@@ -28,7 +28,6 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Update kubeconfig
-        run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name ${{ secrets.EKS_CLUSTER_NAME }}
-
+        run: aws eks update-kubeconfig --region ${{ secrets.AWS_REGION }} --name boris-cluster
       - name: Deploy to cluster
         run: kubectl apply -f .
